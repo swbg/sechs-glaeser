@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
-import duck from "./creatives/duck.svg";
+import duck from "./assets/duck.svg";
 
 ReactDOM.render(
   <React.StrictMode>
