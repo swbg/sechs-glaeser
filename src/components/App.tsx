@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
-import GameStarter from "./GameStarter";
+import GameJoiner from "./GameJoiner";
+import GameRequestor from "./GameRequestor";
+import GameCreator from "./GameCreator";
 import Game from "./Game";
 import { rtdb } from "../firebase/config";
 import { gameType } from "../utils";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
-  const [pid, setPid] = useState<string | null>("");
-  const [gid, setGid] = useState<string>("");
+  const [pid, setPid] = useState("");
+  const [gid, setGid] = useState("");
   const [game, setGame] = useState<gameType | null>(null);
+  const [showCreateGame, setShowCreateGame] = useState(false);
 
   // Listen to RTDB game instance
   useEffect(() => {
@@ -26,8 +30,18 @@ const App = () => {
 
   return (
     <div className="app">
-      {!(pid && gid && game) && <GameStarter setPid={setPid} setGid={setGid} />}
-      {pid && gid && game && <Game pid={pid} gid={gid} game={game} />}
+      <Router>
+        <Switch>
+          <Route path="/create">
+            <GameCreator />
+          </Route>
+          <Route path="/">
+            {!showCreateGame && !(pid && gid && game) && <GameJoiner setPid={setPid} setGid={setGid} setShowCreateGame={setShowCreateGame} />}
+            {showCreateGame && <GameRequestor setShowCreateGame={setShowCreateGame} />}
+            {!showCreateGame && pid && gid && game && <Game pid={pid} gid={gid} game={game} />}
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };

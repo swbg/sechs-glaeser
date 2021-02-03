@@ -3,7 +3,6 @@ import { gameType } from "../utils";
 
 const joinGame = (
   name: string,
-  setPid: (pid: string | null) => void,
   gid: string
 ) => {
   const uref = rtdb.ref("games").child(gid).child("players").push();
@@ -13,7 +12,24 @@ const joinGame = (
       uref.set({ name: name, beer: 0, shot: 0 });
     }
   });
-  setPid(uref.key);
+  return uref.key;
+};
+
+const createGame = () => {
+  const gref = rtdb.ref("games").push();
+  gref.set({
+    currentPlayer: "",
+    round: 1,
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    pips: -1,
+    state: "start",
+  });
+  return gref.key;
 };
 
 const resetGame = (pid: string, gid: string) => {
@@ -48,4 +64,4 @@ const setGlasses = (gid: string, pid: string, glasses: number, gt: string) => {
     .update({ [gt]: glasses });
 };
 
-export { joinGame, resetGame, updateGame, setGameState, setGlasses };
+export { joinGame, createGame, resetGame, updateGame, setGameState, setGlasses };
