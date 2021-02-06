@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { joinGame as _joinGame } from "../firebase/interact";
 import { rtdb } from "../firebase/config";
+import { useHistory } from 'react-router-dom'
 
 const GameJoiner = ({
   setPid,
@@ -12,11 +13,12 @@ const GameJoiner = ({
   setGid: (gid: string) => void;
   setShowCreateGame: (showCreateGame: boolean) => void;
 }) => {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState(window.localStorage.getItem('playerName') || "");
+  const [password, setPassword] = useState(window.localStorage.getItem('gameName') || "");
   const [passwordDisabled, setPasswordDisabled] = useState(false);
   const [nameError, setNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     if (window.location.search.startsWith("?game_id=")) {
@@ -25,11 +27,16 @@ const GameJoiner = ({
     }
   }, []);
 
+  const resetGameId = () => {
+    setPasswordDisabled(false);
+    history.push("/");
+  };
+
   const handlePasswordError = () => {
     setPassword("");
     setPasswordError("Bitte eine existierende Spiel ID angeben!");
     setPasswordDisabled(false);
-  }
+  };
 
   const joinGame = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,6 +61,8 @@ const GameJoiner = ({
             setPasswordError("Unerwarteter Fehler beim Spielbeitritt aufgetreten.");
           }
           setPid(pid!);
+          window.localStorage.setItem('playerName', name);
+          window.localStorage.setItem('gameName', password);
         } else {
           handlePasswordError();
         }
@@ -84,8 +93,9 @@ const GameJoiner = ({
           />}
           {passwordError && <div className="errorField">{passwordError}</div>}
           <button type="submit" className="startButton">Spiel beitreten</button>
-          {!passwordDisabled && <div className="spacer"></div>}
+          <div className="spacer"></div>
           {!passwordDisabled && <button type="button" className="startButton" onClick={() => setShowCreateGame(true)}>Neues Spiel</button>}
+          {passwordDisabled && <button type="button" className="startButton" onClick={resetGameId}>Abbrechen</button>}
         </form>
       </div>
     </div>
