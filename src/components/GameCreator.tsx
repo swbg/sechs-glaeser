@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom'
 const GameCreator = () => {
   const [email, setEmail] = useState(window.localStorage.getItem('emailForSignIn') || "");
   const [emailError, setEmailError] = useState("");
-  const history = useHistory()
+  const history = useHistory();
 
   const createGame = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

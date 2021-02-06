@@ -67,6 +67,7 @@ const Game = ({
           <GameInfo game={game} countToGo={countToGo} />
           <GameControls pid={pid} gid={gid} game={game} />
           <PlayerInfo game={game} />
+          <button type="button" className="startButton" onClick={() => console.log("click")}>Freunde einladen</button>
         </div>
       )}
     </div>
