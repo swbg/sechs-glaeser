@@ -97,7 +97,7 @@ const GameControls = ({
       )}
 
       {game.currentPlayer === pid && (
-        <div>
+        <>
           {game.state === "start" && (
             <div className="actionIndicator">
               <div>Du bist dran!</div>
@@ -138,11 +138,11 @@ const GameControls = ({
               </button>
             </div>
           )}
-        </div>
+        </>
       )}
 
       {game.currentPlayer !== pid && (
-        <div>
+        <>
           {game.state === "start" && (
             <div className="actionIndicator">
               {(game.players[game.currentPlayer] || { name: "Jemand" }).name}{" "}
@@ -168,7 +168,7 @@ const GameControls = ({
               hat eine {game.pips + 1} gewürfelt und darf auffüllen.
             </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );
