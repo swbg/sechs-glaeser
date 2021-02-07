@@ -28,6 +28,18 @@ const App = () => {
     }
   }, [gid]);
 
+  // Function to leave game
+  const leaveGame = () => {
+    setPid("");
+    setGid("");
+    setGame(null);
+    setShowCreateGame(false);
+    rtdb.ref("games").off();
+    if (pid && gid) {
+      rtdb.ref("games").child(gid).child("players").child(pid).remove();
+    }
+  };
+
   return (
     <div className="app">
       <Router>
@@ -38,7 +50,7 @@ const App = () => {
           <Route path="/">
             {!showCreateGame && !(pid && gid && game) && <GameJoiner setPid={setPid} setGid={setGid} setShowCreateGame={setShowCreateGame} />}
             {showCreateGame && <GameRequestor setShowCreateGame={setShowCreateGame} />}
-            {!showCreateGame && pid && gid && game && <Game pid={pid} gid={gid} game={game} />}
+            {!showCreateGame && pid && gid && game && <Game pid={pid} gid={gid} game={game} leaveGame={leaveGame} />}
           </Route>
         </Switch>
       </Router>
