@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { createGame as _createGame } from "../firebase/interact";
 import { auth } from "../firebase/config";
@@ -6,9 +6,13 @@ import { useHistory } from 'react-router-dom'
 
 
 const GameCreator = () => {
-  const [email, setEmail] = useState(window.localStorage.getItem('emailForSignIn') || "");
+  const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const history = useHistory();
+    
+  useEffect(() => {
+    setEmail(window.localStorage.getItem('emailForSignIn') || "");
+  }, []);
 
   const createGame = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

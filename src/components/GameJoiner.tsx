@@ -13,8 +13,8 @@ const GameJoiner = ({
   setGid: (gid: string) => void;
   setShowCreateGame: (showCreateGame: boolean) => void;
 }) => {
-  const [name, setName] = useState(window.localStorage.getItem('playerName') || "");
-  const [password, setPassword] = useState(window.localStorage.getItem('gameName') || "");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
   const [passwordDisabled, setPasswordDisabled] = useState(false);
   const [nameError, setNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -25,6 +25,8 @@ const GameJoiner = ({
       setPasswordDisabled(true);
       setPassword(window.location.search.substr("?game_id=".length));
     }
+    setName(window.localStorage.getItem('playerName') || "");
+    setPassword(window.localStorage.getItem('gameName') || "");
   }, []);
 
   const resetGameId = () => {
