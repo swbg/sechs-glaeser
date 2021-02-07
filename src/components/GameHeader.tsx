@@ -7,11 +7,13 @@ const GameHeader = ({
   gid,
   game,
   resetGame,
+  leaveGame,
 }: {
   pid: string;
   gid: string;
   game: gameType;
   resetGame: (pid: string, gid: string) => void;
+  leaveGame: () => void;
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showRules, setShowRules] = useState(false);
@@ -46,6 +48,14 @@ const GameHeader = ({
                   }}
                 >
                   Spiel zurücksetzen
+                </button>
+                <button
+                  className="rollButton"
+                  onClick={() => {
+                    leaveGame();
+                  }}
+                >
+                  Spiel verlassen
                 </button>
                 <button
                   className="rollButton"
