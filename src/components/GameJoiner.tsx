@@ -21,12 +21,12 @@ const GameJoiner = ({
   const history = useHistory();
 
   useEffect(() => {
+    setName(window.localStorage.getItem('playerName') || "");
+    setPassword(window.localStorage.getItem('gameName') || "");
     if (window.location.search.startsWith("?game_id=")) {
       setPasswordDisabled(true);
       setPassword(window.location.search.substr("?game_id=".length));
     }
-    setName(window.localStorage.getItem('playerName') || "");
-    setPassword(window.localStorage.getItem('gameName') || "");
   }, []);
 
   const resetGameId = () => {

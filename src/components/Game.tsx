@@ -26,7 +26,7 @@ const Game = ({
     if (game.state === "start") {
       // Reset countToGo
       setCountToGo(-1);
-    } else if (game.state === "roll" && game.pips >= 0) {
+    } else if (game.state !== "start" && game.pips >= 0) {
       if (countToGo < 0) {
         // Initialize countToGo
         setCountToGo(0);
@@ -37,7 +37,7 @@ const Game = ({
           50 + (countToGo * countToGo) / 1.5
         );
         return () => window.clearTimeout(timeout);
-      } else if (countToGo >= game.pips + 3 * 6) {
+      } else if (countToGo >= game.pips + 3 * 6 && game.currentPlayer === pid) {
         // Advance game state
         if (game[game.pips] > 0) {
           setGameState(gid, "drink");
