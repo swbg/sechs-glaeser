@@ -8,7 +8,7 @@ const PlayerInfo = ({ game }: { game: gameType }) => {
       <div className="playerList">
         <table>
           <tbody>
-            {Object.keys(game.players).map((p) => (
+            {game.players && Object.keys(game.players).map((p) => (
               <tr key={p} className="playerInfoItem">
                 <td className="tableEmoji">
                   <img

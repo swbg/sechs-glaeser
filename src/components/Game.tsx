@@ -11,10 +11,12 @@ const Game = ({
   pid,
   gid,
   game,
+  leaveGame,
 }: {
   pid: string;
   gid: string;
   game: gameType;
+  leaveGame: () => void;
 }) => {
   const [countToGo, setCountToGo] = useState<number>(-1);
 
@@ -47,7 +49,7 @@ const Game = ({
 
   // Claim currentPlayer if currentPlayer leaves
   useEffect(() => {
-    if (!Object.keys(game.players).includes(game.currentPlayer)) {
+    if (game.players && !Object.keys(game.players).includes(game.currentPlayer)) {
       const newPid = getNextPlayer(game.players, game.currentPlayer);
       if (pid === newPid) {
         updateGame(gid, {
@@ -62,8 +64,8 @@ const Game = ({
   return (
     <div className="game">
       {game && (
-        <div className="container">
-          <GameHeader pid={pid} gid={gid} game={game} resetGame={resetGame} />
+        <div className="container flexGame">
+          <GameHeader pid={pid} gid={gid} game={game} resetGame={resetGame} leaveGame={leaveGame} />
           <GameInfo game={game} countToGo={countToGo} />
           <GameControls pid={pid} gid={gid} game={game} />
           <PlayerInfo game={game} />
