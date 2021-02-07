@@ -4,6 +4,7 @@ import GameHeader from "./GameHeader";
 import GameInfo from "./GameInfo";
 import GameControls from "./GameControls";
 import PlayerInfo from "./PlayerInfo";
+import InviteMenu from "./InviteMenu";
 import { updateGame, resetGame, setGameState } from "../firebase/interact";
 import { gameType } from "../utils";
 
@@ -69,7 +70,7 @@ const Game = ({
           <GameInfo game={game} countToGo={countToGo} />
           <GameControls pid={pid} gid={gid} game={game} />
           <PlayerInfo game={game} />
-          <button type="button" className="startButton" onClick={() => console.log("click")}>Freunde einladen</button>
+          <InviteMenu gid={gid} />
         </div>
       )}
     </div>

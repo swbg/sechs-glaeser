@@ -152,7 +152,8 @@ button#dummyButton {
 }
 
 .nameField,
-.passwordField {
+.passwordField,
+.urlField {
   outline: none;
   border: none;
   background-color: var(--light-color);
@@ -285,19 +286,14 @@ button#dummyButton {
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
-  left: 0;
-  top: 0;
 }
 
 /* GlassSelector */
-
 .glassSelector {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
-  left: 0;
-  top: 0;
 }
 
 .glassSelectorList {
@@ -313,4 +309,12 @@ button#dummyButton {
   width: 7rem;
   padding-top: 1rem;
   padding-bottom: 0.5rem;
+}
+
+/* InviteMenu */
+.inviteMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
 }
