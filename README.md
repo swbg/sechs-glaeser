@@ -4,7 +4,7 @@ A fun game to make Covid-19 times go by faster. Visit https://sechs-glaeser.de t
 
 You can [click here](https://sechs-glaeser.de/max_trinkt!) to play without creating your own game.
 
-![](img/img.png)
+<img src="img/img.png" width=250>
 
 # Contributors
 
